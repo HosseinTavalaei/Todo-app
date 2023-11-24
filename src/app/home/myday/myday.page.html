@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-margin-start">My day</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="todos-screen">
+  <ion-grid fixed class="display-tasks">
+    <ion-row>
+      <ion-col size="12">
+        <ion-list class="todos-list">
+        <ion-item *ngFor="let todo of existTodos" class="todo-item" >
+          <ion-label>{{todo.text}}</ion-label>
+          <ion-buttons slot="end">
+            <ion-button (click)="setTodoStatusToComplete(todo.id, $event)">
+              <ion-icon slot="icon-only" name="ellipse-outline"></ion-icon>
+            </ion-button>
+            
+            <ion-button (click)="setTodoStatusToImportant(todo.id, $event)">
+              <ion-icon slot="icon-only" name="star-outline"></ion-icon>
+            </ion-button>
+
+            <ion-button (click)="removeTask(todo.id, $event)">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>  
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col size="12">
+        <ion-input 
+        type="text"
+         placeholder="Add a task" 
+         fill="outline" 
+         clearInput="true"
+         color="dark"
+        inputmode="email"
+        class="add-task-input"
+        (ionFocus)="changeInputIcon()"
+        (ionBlur)="changeInputIcon()"
+        (keyup)="addNewTask($event)"
+         >
+         <ion-icon [name]="inputIconName" slot="icon-only" class="icon-inside-input"></ion-icon>
+        </ion-input>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

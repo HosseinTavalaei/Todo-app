@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create your account</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button  (click)="onCansel()">
+        <ion-icon  name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="registerUser(f)"  novalidate class="ion-margin-top">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item lines="none">
+            <ion-input
+            class="auth-input"
+            type="text"
+            fill="outline"
+            label="First Name :"
+            labelPlacement="floating"
+            errorText="Please enter a valid email"
+            name="firstName"
+            ngModel
+            text
+            clearInput="true"
+            required="true"
+          ></ion-input>  
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-input
+            class="auth-input"
+            type="text"
+            fill="outline"
+            label="Last Name :"
+            labelPlacement="floating"
+            errorText="Please enter a valid email"
+            name="lastName"
+            ngModel
+            text
+            clearInput="true"
+            required="true"
+          ></ion-input>  
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-input
+            class="auth-input"
+            type="text"
+            fill="outline"
+            label="Email"
+            labelPlacement="floating"
+            errorText="Please enter a valid email"
+            name="email"
+            ngModel
+            email
+            clearInput="true"
+            required="true"
+          ></ion-input>  
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-input
+            class="auth-input"
+            type="password"
+            fill="outline"
+            label="Password"
+            labelPlacement="floating"
+            errorText="Please enter a valid email"
+            name="password"
+            ngModel
+            password
+            minlength="8"
+            clearInput="true"
+            required="true"
+          ></ion-input>  
+          </ion-item>
+
+          <ion-button type="submit" fill="solid" [disabled]="!f.valid" class="auth-button">
+            SignUp
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
