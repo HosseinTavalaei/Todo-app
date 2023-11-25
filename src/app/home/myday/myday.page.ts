@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TodosService } from '../todos.service';
 import { ITodo } from 'src/app/auth/Database';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-myday',
@@ -11,7 +12,10 @@ export class MydayPage implements OnInit {
 
   inputIconName: string = 'add'
   existTodos :ITodo[] | undefined;
-  constructor(private todosService: TodosService) { }
+  constructor(
+    private todosService: TodosService,
+    private alertCtrl: AlertController
+    ) { }
 
   ngOnInit() {
     this.existTodos = this.todosService.getActiveUserTodos()
@@ -38,29 +42,56 @@ export class MydayPage implements OnInit {
 
   removeTask(id: number, event: any){
 
-    let selectedTag = event.target.parentElement.parentElement
-
-    selectedTag.remove()
-    
-    this.todosService.removeTodo(id)
+    let item = event.target.parentElement.parentElement
+    this.alertCtrl.create({
+      header: 'Delete Task ?',
+      message: 'Are you sure to delet task',
+      buttons:[{
+        text: 'cancel',
+        role: 'cancel'
+      },
+    {
+      text: 'Yes',
+      handler: ()=>{
+        this.todosService.removeTodo(id)
+        item.remove()
+      }
+    }]
+    }).then(alertEl => alertEl.present())
 
   }
 
-  setTodoStatusToComplete(id : number, event: any){
-    let selectedTag = event.target.parentElement.parentElement
+  setTodoStatusToComplete( todo: ITodo){
+  
+    if (todo.isCompleted === false) {
+      this.todosService.setTodoToComplete(todo)
+      const soundEffect = new Audio('../../../assets/sound-effects/tunetank.com_click-bell-11.wav')
+      soundEffect.play()
+    }else{
 
-    selectedTag.remove()
+      this.todosService.undoCompletedTodo(todo)
+      const soundEffect = new Audio('../../../assets/sound-effects/tunetank.com_click-bell-11.wav')
+      soundEffect.play()
+      
 
-    this.todosService.setTodoToComplete(id)
-    
+    }
+
   }
 
-  setTodoStatusToImportant(id: number, event: any){
-    let selectedTag = event.target.parentElement.parentElement
+  setTodoStatusToImportant(todo: ITodo){
 
-    selectedTag.remove()
+    if (todo?.isImportant === false) {
+      this.todosService.setTodoToImportant(todo)
+      const soundEffect = new Audio('../../../assets/sound-effects/tunetank.com_click-bell-11.wav')
+      soundEffect.play()
+    }else{
 
-    this.todosService.setTodoToImportant(id)
+      this.todosService.undoImportantTodo(todo)
+      const soundEffect = new Audio('../../../assets/sound-effects/tunetank.com_click-bell-11.wav')
+      soundEffect.play()
+     
+
+    }
   }
  
 }

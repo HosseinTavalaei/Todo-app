@@ -54,23 +54,21 @@ export class TodosService {
     this.updateLocalStorage()
   }
 
-  setTodoToComplete(id: number){
-    const selectedTodo = this.activeUserTodos?.find(todo => todo.id === id)
+  setTodoToComplete(todo: ITodo){
+    
 
-    if(selectedTodo){
-      selectedTodo.isCompleted = true;
+    if(todo){
+      todo.isCompleted = true;
     
     }
 
     this.updateLocalStorage()
   }
 
-  setTodoToImportant(id: number){
-    const selectedTodo = this.activeUserTodos?.find(todo => todo.id === id)
-
-    if(selectedTodo){
-      selectedTodo.isImportant = true;
+  setTodoToImportant(todo: ITodo){
     
+    if(todo){
+      todo.isImportant = true;
     }
 
     this.updateLocalStorage()
@@ -101,5 +99,22 @@ export class TodosService {
 
     }
   }
+  
+  undoCompletedTodo(todo: ITodo){
 
+    if(todo){
+      todo.isCompleted = false;
+    }
+
+    this.updateLocalStorage()
+  }
+
+  undoImportantTodo(todo: ITodo){
+    
+    if(todo){
+      todo.isImportant = false;
+    }
+
+    this.updateLocalStorage()
+  }
 }

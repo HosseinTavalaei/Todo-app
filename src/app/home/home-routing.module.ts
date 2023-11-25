@@ -1,3 +1,4 @@
+import { CompletedPage } from './completed/completed.page';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home.page';
@@ -16,13 +17,11 @@ const routes: Routes = [
         loadChildren: () => import('./important/important.module').then( m => m.ImportantPageModule)
       },
       {
-        path: 'mytasks',
-        loadChildren: () => import('./mytasks/mytasks.module').then( m => m.MytasksPageModule)
+        path: 'completed',
+        loadChildren: () => import('./completed/completed.module').then( m => m.CompletedPageModule)
       }
     ]
   },
-  
-
   
 ];
 

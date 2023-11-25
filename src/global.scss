@@ -27,7 +27,6 @@
 
 
 .display-tasks{
-    // background-color: red;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -35,14 +34,27 @@
     margin-top: 20px;
     
 }
-
+  .add-task-item{
+    --background: transparent;
+    --color: var(--ion-color-tertiary-tint);
+  }
+  
+    
   ion-input {
-    &.add-task-input {
-      border: 1px solid #ccc !important; 
+    &.add-task-input { 
       border-radius: 6px;
       --padding-start: 50px !important;
-      font-size: 16px;
-      caret-color: var(--ion-color-tertiary-tint);
+      font-size: 1.2rem;
+      
+
+      &.ion-color-dark {
+        --ion-color-base: var(--ion-color-secondary-tint, #222428) !important;
+        --ion-color-base-rgb: var(--ion-color-dark-rgb, 34, 36, 40) !important;
+        --ion-color-contrast: var(--ion-color-dark-contrast, #fff) !important;
+        --ion-color-contrast-rgb: var(--ion-color-dark-contrast-rgb, 255, 255, 255) !important;
+        --ion-color-shade: var(--ion-color-secondary-tint, #1e2023) !important;
+        --ion-color-tint: var(--ion-color-dark-tint, #383a3e) !important;
+    }
      
     }
 
@@ -54,7 +66,7 @@
       
     }
   }
-
+  
   .icon-inside-input{
         position: absolute !important;
         top: 50% !important;

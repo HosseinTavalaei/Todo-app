@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { IUser } from './Database';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { RegisterComponent } from './register/register.component';
 import { Router } from '@angular/router';
 
@@ -21,12 +21,14 @@ import { Router } from '@angular/router';
 export class AuthPage implements OnInit {
 
   athenticatedUser: IUser | undefined;
+  isLoading: boolean = false;
 
   constructor(
     private authService: AuthService,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
-    private router: Router
+    private router: Router, 
+    private loadingCtrl: LoadingController
   ) {}
 
   ngOnInit() {
@@ -44,13 +46,21 @@ export class AuthPage implements OnInit {
       if (loginUser?.password === form.value.password) {
 
         this.authService.setUserToLogIn(loginUser)
-        this.router.navigateByUrl('/home/myday')
+        this.isLoading = true;
+        this.loadingCtrl.create({message: "loging in ..."}).then(loadingEl => {
+          loadingEl.present()
+          setTimeout(() => {
+            this.isLoading = false
+            loadingEl.dismiss()
+            this.router.navigateByUrl('/home/myday')
+          }, 2000);
+        })
         
       }else {
 
         this.alertCtrl.create({
-          header: 'Wrong password !',
-          message: 'The password that you have entered is wrong ',
+          header: 'Wrong information !',
+          message: 'Username or password is incorrect',
           buttons: [{text: 'Ok', role: 'cansel'}]
         }).then(alertEL => alertEL.present())
       }

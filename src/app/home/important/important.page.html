@@ -12,12 +12,13 @@
         <ion-item *ngFor="let todo of existTodos" class="todo-item">
           <ion-label>{{todo.text}}</ion-label>
           <ion-buttons slot="end">
-            <ion-button (click)="setTodoStatusToComplete(todo.id, $event)">
-              <ion-icon slot="icon-only" name="ellipse-outline"></ion-icon>
+            <ion-button (click)="setTodoStatusToComplete(todo)">
+              <ion-icon slot="icon-only" name="ellipse-outline" *ngIf="!todo.isCompleted"></ion-icon>
+              <ion-icon slot="icon-only" name="checkmark-circle-outline" *ngIf="todo.isCompleted"></ion-icon>
             </ion-button>
             
-            <ion-button >
-              <ion-icon slot="icon-only" name="star"></ion-icon>
+            <ion-button (click)="undoIsImportantToFalse(todo, $event)">
+              <ion-icon slot="icon-only" name="star" ></ion-icon>
             </ion-button>
 
             <ion-button (click)="removeTask(todo.id, $event)">
