@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CompletedPageRoutingModule } from './completed-routing.module';
 
 import { CompletedPage } from './completed.page';
+import { TodoComponent } from '../todo/todo.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { CompletedPage } from './completed.page';
     IonicModule,
     CompletedPageRoutingModule
   ],
-  declarations: [CompletedPage]
+  // declarations: [CompletedPage]
 })
 export class CompletedPageModule {}

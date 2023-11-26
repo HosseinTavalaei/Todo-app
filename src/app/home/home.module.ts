@@ -6,6 +6,10 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { MydayPage } from './myday/myday.page';
+import { TodoComponent } from './todo/todo.component';
+import { CompletedPage } from './completed/completed.page';
+import { ImportantPage } from './important/important.page';
+import { SharedModule } from '../shared.module';
 
 
 @NgModule({
@@ -13,8 +17,14 @@ import { MydayPage } from './myday/myday.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    SharedModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage,
+  MydayPage,
+  CompletedPage,
+  ImportantPage
+]
+
 })
 export class HomePageModule {}

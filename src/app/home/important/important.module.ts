@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ImportantPageRoutingModule } from './important-routing.module';
 
 import { ImportantPage } from './important.page';
+import { TodoComponent } from '../todo/todo.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { ImportantPage } from './important.page';
     IonicModule,
     ImportantPageRoutingModule
   ],
-  declarations: [ImportantPage]
+  // declarations: [ImportantPage]
 })
 export class ImportantPageModule {}

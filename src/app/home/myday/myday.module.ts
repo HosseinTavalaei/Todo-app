@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MydayPageRoutingModule } from './myday-routing.module';
 
 import { MydayPage } from './myday.page';
+import { TodoComponent } from '../todo/todo.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { MydayPage } from './myday.page';
     IonicModule,
     MydayPageRoutingModule
   ],
-  declarations: [MydayPage]
+  // declarations: [MydayPage]
 })
 export class MydayPageModule {}
