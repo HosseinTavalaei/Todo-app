@@ -17,8 +17,6 @@ export class HomePage implements OnInit {
   isProfileSettinOpen : boolean = false;
 
   constructor(
-    private platform : Platform,
-    private menuCtrl: MenuController,
     private authService: AuthService,
     private router: Router,
     private todoService: TodosService
@@ -29,9 +27,6 @@ export class HomePage implements OnInit {
     this.todoService.getActiveUser(this.logedInUser)
   }
 
-  onOpenProfile(){
-      return this.isProfileSettinOpen = !this.isProfileSettinOpen
-  }
 
   onLogOutUser(){
     this.authService.setUserToLogOut()

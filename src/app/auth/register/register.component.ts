@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
       lastName: form.value.lastName,
       email: form.value.email,
       password: form.value.password,
-      todos: [],
+      todos: []
     };
     
     const isUserExisted = this.existingUsers?.some(user => user.email === userIsRegistering.email)

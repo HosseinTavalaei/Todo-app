@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
 export class AuthPage implements OnInit {
 
   athenticatedUser: IUser | undefined;
-  isLoading: boolean = false;
+  
 
   constructor(
     private authService: AuthService,
@@ -46,11 +46,11 @@ export class AuthPage implements OnInit {
       if (loginUser?.password === form.value.password) {
 
         this.authService.setUserToLogIn(loginUser)
-        this.isLoading = true;
+        
         this.loadingCtrl.create({message: "loging in ..."}).then(loadingEl => {
           loadingEl.present()
           setTimeout(() => {
-            this.isLoading = false
+           
             loadingEl.dismiss()
             this.router.navigateByUrl('/home/myday')
           }, 2000);

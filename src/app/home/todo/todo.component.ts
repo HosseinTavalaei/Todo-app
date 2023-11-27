@@ -8,7 +8,7 @@ import { ITodo } from 'src/app/auth/Database';
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss'],
 })
-export class TodoComponent implements OnInit {
+export class TodoComponent {
   @Input() receivedTodo!: ITodo;
   @Input() pageLoc!: string;
   constructor(
@@ -16,9 +16,6 @@ export class TodoComponent implements OnInit {
     private alertCtrl: AlertController
   ) {}
 
-  ngOnInit() {
-    console.log('yes');
-  }
 
   setTodoStatusToComplete(todo: ITodo, userLoc: string, event: any) {
     if (todo.isCompleted === false) {
