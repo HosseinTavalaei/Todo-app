@@ -13,6 +13,7 @@ export class MydayPage implements OnInit {
   existTodos :ITodo[] | undefined;
   userLocation: string = 'mydayPage'
   isOpenOption: boolean = false;
+  todoOptionSelected!: ITodo;
   
   constructor(
     private todosService: TodosService
@@ -42,6 +43,20 @@ export class MydayPage implements OnInit {
 
   ChangeOptionsStatus(option: boolean){
     this.isOpenOption = option
+  }
+
+  setTodoOption(todo: ITodo){
+    this.todoOptionSelected = todo
+  }
+
+  taskScreenSize(): number{
+    let size : number;
+    if(this.isOpenOption === true){
+      size = 9 
+    }else {
+      size = 12
+    }
+    return size;
   }
  
 }

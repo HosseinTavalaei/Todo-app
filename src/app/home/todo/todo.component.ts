@@ -13,7 +13,7 @@ export class TodoComponent {
   @Input() pageLoc!: string;
 
   @Output() public isOpen = new EventEmitter<boolean>;
-  @Output() public clickedTodo: ITodo | undefined;
+  @Output() public clickedTodo = new EventEmitter<ITodo>
   isOptionsOn: boolean = false;
   constructor(
     private todosService: TodosService,
@@ -81,7 +81,6 @@ export class TodoComponent {
   openTodoOption(){
     this.isOptionsOn = !this.isOptionsOn
     this.isOpen.emit(this.isOptionsOn)
-
-    console.log(this.isOptionsOn);
+    this.clickedTodo.emit(this.receivedTodo)
   }
 }
