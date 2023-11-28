@@ -1,24 +1,19 @@
-<ion-item class="todo-item">
-  <ion-label>{{receivedTodo.text}}</ion-label>
-  <ion-buttons slot="end">
+<ion-item class="todo-item" button (click)="openTodoOption()">
+  <ion-buttons slot="start">
     <ion-button (click)="setTodoStatusToComplete(receivedTodo, pageLoc, $event)">
       <ion-icon slot="icon-only" name="ellipse-outline" *ngIf="!receivedTodo.isCompleted"></ion-icon>
       <ion-icon slot="icon-only" name="checkmark-circle-outline" *ngIf="receivedTodo.isCompleted"></ion-icon>
     </ion-button>
-    
+  </ion-buttons>
+  
+  <ion-label>{{receivedTodo.text}}</ion-label>
+
+  <ion-buttons slot="end">
     <ion-button (click)="setTodoStatusToImportant(receivedTodo, pageLoc, $event)">
       <ion-icon slot="icon-only" name="star-outline" *ngIf="!receivedTodo.isImportant"></ion-icon>
       <ion-icon slot="icon-only" name="star" *ngIf="receivedTodo.isImportant"></ion-icon>
     </ion-button>
 
-    <ion-button (click)="removeTask(receivedTodo.id, $event)">
-      <ion-icon slot="icon-only" name="trash"></ion-icon>
-    </ion-button>
-
-    <ion-button (click)="openTodoOption()">
-      <ion-icon slot="icon-only" name="chevron-back-outline" *ngIf="!isOptionsOn"></ion-icon>
-      <ion-icon slot="icon-only" name="chevron-forward-outline" *ngIf="isOptionsOn"></ion-icon>
-    </ion-button>
   </ion-buttons>
 </ion-item>
 

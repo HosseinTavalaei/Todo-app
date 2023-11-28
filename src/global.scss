@@ -94,12 +94,15 @@
     .todos-list{
       padding-top: 0;
       padding-bottom: 0;
+      background-color: transparent;
     }
 
     ion-item{
       &.todo-item{
         --background: var(--ion-color-tertiary);
         --color: var(--ion-color-tertiary-contrast);
+        --border-radius:5px;
+        margin-top: 5px;
       }
     }
 
