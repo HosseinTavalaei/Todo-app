@@ -5,35 +5,45 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="todos-screen">
-  <ion-grid fixed class="display-tasks">
+  <ion-grid fixed class="grid-fix">
     <ion-row>
-      <ion-col size="12">
-        <ion-list class="todos-list">
-          <app-todo-item *ngFor="let todo of existTodos"
-          [receivedTodo]= "todo"
-          [pageLoc] = "userLocation"></app-todo-item>
-        </ion-list>
+      <ion-col size="9">
+        <ion-grid fixed class="display-tasks">
+          <ion-row>
+            <ion-col size="12">
+              <ion-list class="todos-list">
+                <app-todo-item *ngFor="let todo of existTodos"
+                [receivedTodo]= "todo"
+                [pageLoc] = "userLocation"
+                (isOpen)="ChangeOptionsStatus($event)"></app-todo-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+          <ion-row >
+            <ion-col size="12">
+              <ion-item class="add-task-item">
+                <ion-input 
+              type="text"
+               placeholder="Add a task" 
+               fill="outline" 
+               clearInput="true"
+               color="dark"
+              inputmode="email"
+              class="add-task-input"
+              (ionFocus)="changeInputIcon()"
+              (ionBlur)="changeInputIcon()"
+              (keyup)="addNewTask($event)"
+               >
+               <ion-icon [name]="inputIconName" slot="icon-only" class="icon-inside-input"></ion-icon>
+              </ion-input>
+              </ion-item>
+      
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-col>
-    </ion-row>
-    <ion-row >
-      <ion-col size="12">
-        <ion-item class="add-task-item">
-          <ion-input 
-        type="text"
-         placeholder="Add a task" 
-         fill="outline" 
-         clearInput="true"
-         color="dark"
-        inputmode="email"
-        class="add-task-input"
-        (ionFocus)="changeInputIcon()"
-        (ionBlur)="changeInputIcon()"
-        (keyup)="addNewTask($event)"
-         >
-         <ion-icon [name]="inputIconName" slot="icon-only" class="icon-inside-input"></ion-icon>
-        </ion-input>
-        </ion-item>
-
+      <ion-col size="3" *ngIf="!isOpenOption">
+        <app-todo-options></app-todo-options>
       </ion-col>
     </ion-row>
   </ion-grid>

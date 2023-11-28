@@ -117,4 +117,8 @@ export class TodosService {
 
     this.updateLocalStorage()
   }
+
+  opeOptions(todo: ITodo, isOptionOpen: boolean){
+      
+  }
 }

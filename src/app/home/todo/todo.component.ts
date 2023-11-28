@@ -1,5 +1,5 @@
 import { TodosService } from './../todos.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ITodo } from 'src/app/auth/Database';
 
@@ -11,6 +11,10 @@ import { ITodo } from 'src/app/auth/Database';
 export class TodoComponent {
   @Input() receivedTodo!: ITodo;
   @Input() pageLoc!: string;
+
+  @Output() public isOpen = new EventEmitter<boolean>;
+  @Output() public clickedTodo: ITodo | undefined;
+  isOptionsOn: boolean = false;
   constructor(
     private todosService: TodosService,
     private alertCtrl: AlertController
@@ -74,4 +78,10 @@ export class TodoComponent {
       .then((alertEl) => alertEl.present());
   }
 
+  openTodoOption(){
+    this.isOptionsOn = !this.isOptionsOn
+    this.isOpen.emit(this.isOptionsOn)
+
+    console.log(this.isOptionsOn);
+  }
 }

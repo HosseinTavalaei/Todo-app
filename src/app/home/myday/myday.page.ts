@@ -12,9 +12,11 @@ export class MydayPage implements OnInit {
   inputIconName: string = 'add'
   existTodos :ITodo[] | undefined;
   userLocation: string = 'mydayPage'
+  isOpenOption: boolean = false;
+  
   constructor(
     private todosService: TodosService
-   
+    
     ) { }
 
   ngOnInit() {
@@ -36,6 +38,10 @@ export class MydayPage implements OnInit {
       event.target.value = null
     }else return
     
+  }
+
+  ChangeOptionsStatus(option: boolean){
+    this.isOpenOption = option
   }
  
 }

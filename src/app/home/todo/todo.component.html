@@ -14,6 +14,11 @@
     <ion-button (click)="removeTask(receivedTodo.id, $event)">
       <ion-icon slot="icon-only" name="trash"></ion-icon>
     </ion-button>
+
+    <ion-button (click)="openTodoOption()">
+      <ion-icon slot="icon-only" name="chevron-back-outline" *ngIf="!isOptionsOn"></ion-icon>
+      <ion-icon slot="icon-only" name="chevron-forward-outline" *ngIf="isOptionsOn"></ion-icon>
+    </ion-button>
   </ion-buttons>
 </ion-item>
 
