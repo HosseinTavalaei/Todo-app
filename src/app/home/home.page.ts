@@ -1,7 +1,6 @@
 import { AuthService } from './../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
-import { MenuController } from '@ionic/angular';
+import { MenuController,Platform } from '@ionic/angular';
 import { IUser } from '../auth/Database';
 import { Router } from '@angular/router';
 import { TodosService } from './todos.service';
@@ -19,19 +18,30 @@ export class HomePage implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private todoService: TodosService
+    private todoService: TodosService,
+    private platformCtrl: Platform,
   ) {}
 
   ngOnInit() {
     this.logedInUser = this.authService.wichUserIsLogedIn()
     this.todoService.getActiveUser(this.logedInUser)
+    this.checkScreenSize()
   }
 
+  checkScreenSize(): boolean{
+    let response: boolean
+    if (this.platformCtrl.width() < 768){
+      response =true;
+    }else{
+      response = false;
+    }
+
+    return response;
+  }
 
   onLogOutUser(){
     this.authService.setUserToLogOut()
     this.router.navigateByUrl('/auth')
-  
   }
 
 }

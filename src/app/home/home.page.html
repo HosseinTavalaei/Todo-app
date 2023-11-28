@@ -2,7 +2,7 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
-      <ion-col size-md="4" size-lg="3" size-xl="2">
+      <ion-col size-md="3"  size-lg="3" size-xl="2" *ngIf="!checkScreenSize()">
         <ion-list class="side-menu">
           <ion-item class="ion-margin-vertical" lines="none">
            
@@ -47,10 +47,9 @@
           </ion-item>
         </ion-list>
       </ion-col>
-      <ion-col size-md="8" size-lg="9" size-xl="10"
-        ><div class="cont">
-          <ion-router-outlet></ion-router-outlet></div
-      ></ion-col>
+      <ion-col size-md="9"  size-lg="9" size-xl="10" class="all-todo-container">
+          <ion-router-outlet></ion-router-outlet>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TodosService } from '../todos.service';
 import { ITodo } from 'src/app/auth/Database';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-myday',
@@ -16,12 +17,14 @@ export class MydayPage implements OnInit {
   todoOptionSelected!: ITodo;
   
   constructor(
-    private todosService: TodosService
+    private todosService: TodosService,
+    private platformCtrl: Platform
     
     ) { }
 
   ngOnInit() {
     this.existTodos = this.todosService.getActiveUserTodos()
+    this.checkScreenSize()
   }
 
   changeInputIcon(){
@@ -59,4 +62,13 @@ export class MydayPage implements OnInit {
     return size;
   }
  
+  checkScreenSize(): boolean{
+    let response: boolean; 
+    if(this.platformCtrl.width() < 768 ){
+      response = true;
+    }else {
+      response = false;
+    }
+    return response; 
+  }
 }
