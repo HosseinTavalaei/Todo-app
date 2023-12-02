@@ -1,6 +1,12 @@
 import { TodosService } from './../todos.service';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+
+} from '@angular/core';
+import { AlertController} from '@ionic/angular';
 import { ITodo } from 'src/app/auth/Database';
 
 @Component({
@@ -9,11 +15,14 @@ import { ITodo } from 'src/app/auth/Database';
   styleUrls: ['./todo.component.scss'],
 })
 export class TodoComponent {
-  @Input() receivedTodo!: ITodo;
+  @Input() receivedTodo: ITodo | undefined;
   @Input() pageLoc!: string;
-
-  @Output() public isOpen = new EventEmitter<boolean>;
-  @Output() public clickedTodo = new EventEmitter<ITodo>
+  @Input() isDetailMode: boolean | undefined;
+  @Input() todoText : string | undefined = ''
+  @Input() flexible: boolean = false;
+  @Output() public isOpen = new EventEmitter<boolean>();
+  @Output() public clickedTodo = new EventEmitter<ITodo>();
+  
   isOptionsOn: boolean = false;
   constructor(
     private todosService: TodosService,
@@ -21,37 +30,48 @@ export class TodoComponent {
   ) {}
 
 
-  setTodoStatusToComplete(todo: ITodo, userLoc: string, event: any) {
-    if (todo.isCompleted === false) {
-      this.todosService.setTodoToComplete(todo);
-      // const soundEffect = new Audio('../../../assets/sound-effects/tunetank.com_click-bell-11.wav')
-      // soundEffect.play()
-    } else {
-      if( userLoc === 'completedPage'){
+  setTodoStatusToComplete(
+    todo: ITodo | undefined,
+    userLoc: string,
+    event: any
+  ) {
+    event.stopPropagation();
+    if (todo !== undefined) {
+      if (todo.isCompleted === false) {
+        this.todosService.setTodoToComplete(todo);
+        // const soundEffect = new Audio('../../../assets/sound-effects/tunetank.com_click-bell-11.wav')
+        // soundEffect.play()
+      } else {
+        this.todosService.undoCompletedTodo(todo);
+      }
+      
+      if (userLoc === 'completedPage') {
         let item = event.target.parentElement.parentElement;
         setTimeout(() => {
           item.remove();
         }, 300);
       }
-
-      this.todosService.undoCompletedTodo(todo);
     }
   }
 
-  setTodoStatusToImportant(todo: ITodo, userLoc: string, event: any) {
-    if (todo.isImportant === false) {
-
-      this.todosService.setTodoToImportant(todo);
-
-    } else {
-
-      if(userLoc === 'importantPage'){
+  setTodoStatusToImportant(
+    todo: ITodo | undefined,
+    userLoc: string,
+    event: any
+  ) {
+    event.stopPropagation();
+    if (todo !== undefined) {
+      if (todo.isImportant === false) {
+        this.todosService.setTodoToImportant(todo);
+      } else {
+        this.todosService.undoImportantTodo(todo);
+      }
+      if (userLoc === 'importantPage') {
         let item = event.target.parentElement.parentElement;
         setTimeout(() => {
           item.remove();
         }, 300);
       }
-      this.todosService.undoImportantTodo(todo);
     }
   }
 
@@ -78,9 +98,22 @@ export class TodoComponent {
       .then((alertEl) => alertEl.present());
   }
 
-  openTodoOption(){
-    this.isOptionsOn = !this.isOptionsOn
-    this.isOpen.emit(this.isOptionsOn)
-    this.clickedTodo.emit(this.receivedTodo)
+  openTodoOption(event: any) {
+    this.isOptionsOn = !this.isOptionsOn;
+    this.isOpen.emit(this.isOptionsOn);
+    this.clickedTodo.emit(this.receivedTodo);
+  }
+
+  changeTaskTitle(newText: string | undefined | number, event: any , todo: ITodo | undefined){
+
+    if(newText !== undefined && event.key === 'Enter' && todo !== undefined ){
+      let converted: string = newText.toString()
+      this.todosService.changeTodoText(todo, converted)
+    }
   }
 }
+
+
+
+  
+

@@ -11,15 +11,19 @@
   <ion-grid fixed class="grid-fix">
     <ion-row>
       <ion-col [size]="taskScreenSize()">
-        <ion-grid fixed class="display-tasks">
+        <ion-grid fixed class="display-tasks grid-fix">
           <ion-row>
             <ion-col size="12">
               <ion-list class="todos-list">
                 <app-todo-item *ngFor="let todo of existTodos"
                 [receivedTodo]= "todo"
+                [todoText]="todo.text"
+                [flexible]="true"
                 [pageLoc] = "userLocation"
+                [isDetailMode]="isDetailMode"
                 (isOpen)="ChangeOptionsStatus($event)"
-                (clickedTodo)="setTodoOption($event)"></app-todo-item>
+                (clickedTodo)="setTodoOption($event)"
+                ></app-todo-item>
               </ion-list>
             </ion-col>
           </ion-row>

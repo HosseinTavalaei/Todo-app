@@ -83,12 +83,12 @@ export class TodosService {
 
   updateLocalStorage(){
     const dataString = localStorage.getItem(this.localStorageKey)
-    const activeUseId = this.activeUser?.id
+    const activeUserId = this.activeUser?.id
     let existData: IUser[];
     if ( dataString !== null){
       existData = JSON.parse(dataString)
 
-      const cleanedData: IUser[] = existData.filter(users => users.id !== activeUseId)
+      const cleanedData: IUser[] = existData.filter(users => users.id !== activeUserId)
       
         if( this.activeUser !== undefined){
 
@@ -118,7 +118,10 @@ export class TodosService {
     this.updateLocalStorage()
   }
 
-  opeOptions(todo: ITodo, isOptionOpen: boolean){
-      
+  changeTodoText(todo: ITodo, newText: string){
+    if(todo){
+      todo.text = newText 
+    }
+    this.updateLocalStorage()
   }
 }

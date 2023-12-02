@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TodosService } from '../todos.service';
 import { ITodo } from 'src/app/auth/Database';
 import { Platform } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-myday',
@@ -13,16 +14,21 @@ export class MydayPage implements OnInit {
   inputIconName: string = 'add'
   existTodos :ITodo[] | undefined;
   userLocation: string = 'mydayPage'
-  isOpenOption: boolean = false;
+  isOpenOption: boolean | undefined;
   todoOptionSelected!: ITodo;
+  isDetailMode: boolean = false;
+  changeText: boolean = false
+  loc: string = ''
   
   constructor(
     private todosService: TodosService,
-    private platformCtrl: Platform
+    private platformCtrl: Platform,
+    private activatedRoute: ActivatedRoute
     
     ) { }
 
   ngOnInit() {
+    
     this.existTodos = this.todosService.getActiveUserTodos()
     this.checkScreenSize()
   }

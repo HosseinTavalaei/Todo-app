@@ -88,7 +88,7 @@
         --background: var(--ion-color-tertiary) !important;
 
       }
-
+  
     }
 
     .todos-list{
@@ -99,15 +99,15 @@
 
     ion-item{
       &.todo-item{
-        --background: var(--ion-color-tertiary);
+        --background: var(--ion-color-tertiary-tint);
         --color: var(--ion-color-tertiary-contrast);
         --border-radius:5px;
-        margin-top: 5px;
+         margin-bottom: 5px;
       }
     }
 
     ion-toolbar{
-      --background: var(--ion-color-primary);
+      --background: var(--ion-color-primary-shade);
       --color: var(--ion-color-primary-contrast)
     }
 

@@ -2,7 +2,7 @@ import { AuthService } from './../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuController,Platform } from '@ionic/angular';
 import { IUser } from '../auth/Database';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TodosService } from './todos.service';
 
 @Component({
@@ -19,10 +19,11 @@ export class HomePage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private todoService: TodosService,
-    private platformCtrl: Platform,
+    private platformCtrl: Platform
   ) {}
 
   ngOnInit() {
+    
     this.logedInUser = this.authService.wichUserIsLogedIn()
     this.todoService.getActiveUser(this.logedInUser)
     this.checkScreenSize()

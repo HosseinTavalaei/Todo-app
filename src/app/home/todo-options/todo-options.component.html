@@ -1,31 +1,32 @@
 <ion-content>
-    <ion-list>
-        <ion-item>
-            <ion-label>{{todo.text}}</ion-label>
-        </ion-item>
+  <ion-list>
 
-        <ion-item>
-            <ion-label>{{todo.id}}</ion-label>
-        </ion-item>
+    <app-todo-item
+      [receivedTodo]="todo"
+      [todoText]="todo?.text"
+      [isDetailMode]="isDetailMode"
+      [flexible]="false">
+    </app-todo-item>
 
-        <ion-item>
-            <ion-label>{{todo.isCompleted}}</ion-label>
-        </ion-item>
-
-        <ion-item>
-            <ion-label>{{todo.isImportant}}</ion-label>
-        </ion-item>
-
-        <ion-item>
-            <ion-label>Awesome Label</ion-label>
-        </ion-item>
-
-        <ion-item>
-            <ion-label>Awesome Label</ion-label>
-        </ion-item>
-
-        <ion-item>
-            <ion-label>Awesome Label</ion-label>
-        </ion-item>
-    </ion-list>
+    <ion-item lines="none">
+      <ion-input
+        type="text"
+        placeholder="Add step"
+        fill="outline"
+        clearInput="true"
+        color="dark"
+        inputmode="email"
+        class="add-step"
+        (ionFocus)="changeInputIcon()"
+        (ionBlur)="changeInputIcon()"
+        
+      >
+        <ion-icon
+          [name]="inputIconName"
+          slot="icon-only"
+          class="icon-inside-input"
+        ></ion-icon
+      ></ion-input>
+    </ion-item>
+  </ion-list>
 </ion-content>

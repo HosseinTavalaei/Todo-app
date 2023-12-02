@@ -1,3 +1,21 @@
 ion-content{
     --background: var(--ion-color-secondary-tint) !important;
 }
+
+ion-input{
+    &.add-step{
+        --padding-start: 50px !important;
+        --border-style: none;
+         font-size: 0.8rem !important;
+         
+    }
+}
+
+.todo-item-detail{
+    --background: red;
+}
+
+.icon-inside-input{
+    font-size: 1rem;
+}
+
