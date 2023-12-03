@@ -11,11 +11,13 @@ ion-input{
     }
 }
 
-.todo-item-detail{
-    --background: red;
-}
-
 .icon-inside-input{
     font-size: 1rem;
 }
 
+
+ion-item{
+    &.step *{
+        font-size: 0.9rem !important;
+    }
+}

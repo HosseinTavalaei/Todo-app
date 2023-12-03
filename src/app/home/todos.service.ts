@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ITodo, IUser } from '../auth/Database';
+import { ITodo, IUser, ISubTodo } from '../auth/Database';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,9 @@ export class TodosService {
   activeUser: IUser | undefined;
   activeUserTodos : ITodo[] | undefined ;
   
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
 
   getActiveUser(user:IUser | undefined){
@@ -34,7 +37,8 @@ export class TodosService {
         id : this.activeUserTodos.length + 1,
         text: newTodoText,
         isCompleted: false,
-        isImportant: false
+        isImportant: false,
+        subTodos: []
       }
 
       this.activeUserTodos.push(newTodo)
@@ -98,6 +102,8 @@ export class TodosService {
       localStorage.setItem(this.localStorageKey, JSON.stringify(cleanedData))
 
     }
+
+    this.authService.setUserToLogIn(this.activeUser)
   }
   
   undoCompletedTodo(todo: ITodo){
@@ -122,6 +128,35 @@ export class TodosService {
     if(todo){
       todo.text = newText 
     }
+    this.updateLocalStorage()
+  }
+
+  addNewSubTask(subTodoText: string, todo: ITodo | undefined){
+    if (todo !== undefined) {
+      const newStep: ISubTodo = {
+        id: todo.subTodos.length +1,
+        isCompleted: false,
+        text: subTodoText
+      }
+      todo.subTodos.push(newStep)
+    }
+    this.updateLocalStorage()
+  }
+
+  setSubTodoComplete(subTodo: ISubTodo){
+    if (subTodo) {
+      subTodo.isCompleted = true
+    }
+
+    this.updateLocalStorage()
+  }
+
+  undoSubTodoComplete(subTodo: ISubTodo){
+
+    if (subTodo) {
+      subTodo.isCompleted = false
+    }
+
     this.updateLocalStorage()
   }
 }

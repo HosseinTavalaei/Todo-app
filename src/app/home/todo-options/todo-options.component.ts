@@ -1,5 +1,6 @@
 import { Component, Input} from '@angular/core';
-import { ITodo } from 'src/app/auth/Database';
+import { ISubTodo, ITodo } from 'src/app/auth/Database';
+import { TodosService } from '../todos.service';
 
 
 @Component({
@@ -11,9 +12,11 @@ export class TodoOptionsComponent {
   @Input() todo: ITodo | undefined; 
   inputIconName: string = 'add'
   todoItem: string = 'todo-item-detail'
-  isDetailMode: boolean = true;
+  isDetailMode: boolean = true; 
 
-  constructor() {}
+  constructor(
+    private todosService: TodosService
+  ) {}
   
 
   changeInputIcon(){
@@ -22,6 +25,34 @@ export class TodoOptionsComponent {
     }else {
       this.inputIconName = 'add'
     }
+  }
+
+  addNewStep(event: any){
+      let value: string; 
+    if (event.key === 'Enter') {
+      value = event.target.value;
+
+      this.todosService.addNewSubTask(value, this.todo)
+
+        event.target.value = ''
+
+    }
+  }
+
+  setToComplete(step: ISubTodo){
+
+    if (step !== undefined) {
+      if (step.isCompleted !== true) {
+        
+        this.todosService.setSubTodoComplete(step)
+      }else{
+        this.todosService.undoSubTodoComplete(step)
+      }
+    }
+  }
+
+  showSubTodos(){
+    console.log(this.todo?.subTodos);
   }
   
 }

@@ -1,13 +1,29 @@
 <ion-content>
   <ion-list>
-
     <app-todo-item
       [receivedTodo]="todo"
       [todoText]="todo?.text"
       [isDetailMode]="isDetailMode"
-      [flexible]="false">
+      [flexible]="false"
+    >
     </app-todo-item>
-
+    <ion-item lines="none" *ngFor="let step of todo?.subTodos" class="step">
+      <ion-buttons slot="start">
+        <ion-button (click)="setToComplete(step)">
+          <ion-icon slot="icon-only" name="ellipse-outline" *ngIf="!step.isCompleted"></ion-icon>
+          <ion-icon slot="icon-only" name="checkmark-circle-outline" *ngIf="step.isCompleted"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-label>{{ step.text }}</ion-label>
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon
+            slot="icon-only"
+            name="ellipsis-vertical-outline"
+          ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
     <ion-item lines="none">
       <ion-input
         type="text"
@@ -19,7 +35,7 @@
         class="add-step"
         (ionFocus)="changeInputIcon()"
         (ionBlur)="changeInputIcon()"
-        
+        (keyup)="addNewStep($event)"
       >
         <ion-icon
           [name]="inputIconName"

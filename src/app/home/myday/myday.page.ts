@@ -28,10 +28,10 @@ export class MydayPage implements OnInit {
     ) { }
 
   ngOnInit() {
-    
     this.existTodos = this.todosService.getActiveUserTodos()
     this.checkScreenSize()
   }
+
 
   changeInputIcon(){
     if (this.inputIconName === 'add'){

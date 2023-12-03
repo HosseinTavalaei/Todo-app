@@ -1,8 +1,15 @@
+export interface ISubTodo{
+    id: number,
+    isCompleted: boolean,
+    text: string
+}
+
 export interface ITodo{
     id: number,
     text: string,
     isCompleted: boolean,
-    isImportant: boolean
+    isImportant: boolean,
+    subTodos: ISubTodo[]
 }
 
 export interface IUser {
