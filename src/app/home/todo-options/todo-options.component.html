@@ -16,7 +16,7 @@
       </ion-buttons>
       <ion-label>{{ step.text }}</ion-label>
       <ion-buttons slot="end">
-        <ion-button>
+        <ion-button (click)="presentPopover(step, $event)">
           <ion-icon
             slot="icon-only"
             name="ellipsis-vertical-outline"

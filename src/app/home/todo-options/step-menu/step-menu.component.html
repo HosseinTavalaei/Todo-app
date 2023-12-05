@@ -1,0 +1,27 @@
+<ion-content>
+  <ion-list>
+    <ion-item lines="none" button (click)=" setToComplete(step)">
+      <ion-icon
+        slot="start"
+        name="ellipse-outline"
+        *ngIf="!step?.isCompleted"
+      ></ion-icon>
+      <ion-icon
+        slot="start"
+        name="checkmark-circle-outline"
+        *ngIf="step?.isCompleted"
+      ></ion-icon>
+      <ion-label>Mark as complete</ion-label>
+    </ion-item>
+
+    <ion-item lines="none" *ngIf="!step?.isCompleted" button (click)="promoteToTask(step)">
+      <ion-icon slot="start" name="add"></ion-icon>
+      <ion-label>Promote to task </ion-label>
+    </ion-item>
+
+    <ion-item lines="none" button class="delete" (click)="deleteSubTodo(step)">
+      <ion-icon slot="start" name="trash-outline"></ion-icon>
+      <ion-label>Delete step</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -159,4 +159,15 @@ export class TodosService {
 
     this.updateLocalStorage()
   }
+
+  removeSubTodo(subtodo: ISubTodo, todo: ITodo | undefined){
+    if (todo !== undefined) {
+      const index = todo.subTodos.indexOf(subtodo)
+      todo.subTodos.splice(index, 1)
+    }
+
+    this.updateLocalStorage()
+  }
+
+  
 }

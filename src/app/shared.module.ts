@@ -1,3 +1,4 @@
+import { StepMenuComponent } from './home/todo-options/step-menu/step-menu.component';
 import { TodoComponent } from './home/todo/todo.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -9,7 +10,8 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     TodoComponent, 
-    TodoOptionsComponent
+    TodoOptionsComponent,
+    StepMenuComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [
     TodoComponent,
-    TodoOptionsComponent
+    TodoOptionsComponent,
+    StepMenuComponent
     
   ],
 })

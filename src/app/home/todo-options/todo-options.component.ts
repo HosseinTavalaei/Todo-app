@@ -1,7 +1,8 @@
 import { Component, Input} from '@angular/core';
 import { ISubTodo, ITodo } from 'src/app/auth/Database';
 import { TodosService } from '../todos.service';
-
+import { StepMenuComponent } from './step-menu/step-menu.component';
+import { PopoverController} from '@ionic/angular';
 
 @Component({
   selector: 'app-todo-options',
@@ -15,7 +16,8 @@ export class TodoOptionsComponent {
   isDetailMode: boolean = true; 
 
   constructor(
-    private todosService: TodosService
+    private todosService: TodosService,
+    public popoverCtrl: PopoverController
   ) {}
   
 
@@ -54,5 +56,17 @@ export class TodoOptionsComponent {
   showSubTodos(){
     console.log(this.todo?.subTodos);
   }
+  
+  presentPopover(step: ISubTodo ,e: any){
+      const todo = this.todo 
+     this.popoverCtrl.create({
+      component: StepMenuComponent,
+      event: e,
+      showBackdrop: false,
+      componentProps: {step, todo},
+      cssClass: 'step-menu'
+    }).then(popEl => popEl.present()) 
+  }
+
   
 }

@@ -1,0 +1,17 @@
+ion-item{
+
+    font-size: 0.8rem;
+
+    ion-icon{
+        margin-right: 10px;
+        color: inherit;
+    }
+
+    &.delete{
+        border-top: solid 0.05rem var(--ion-color-light-shade);
+        
+        --color: var(--ion-color-danger-shade);
+    }
+    
+}
+
