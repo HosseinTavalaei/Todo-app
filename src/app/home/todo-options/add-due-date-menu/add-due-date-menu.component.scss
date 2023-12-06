@@ -6,6 +6,5 @@ ion-list ion-item{
     }
     &:last-child{
         border-top: solid 1px var(--ion-color-light-shade);
-        --color: var(--ion-color-danger-shade);
     }
 }

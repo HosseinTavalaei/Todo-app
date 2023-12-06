@@ -5,13 +5,17 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { TodoOptionsComponent } from './home/todo-options/todo-options.component';
 import { FormsModule } from '@angular/forms';
-
-
+import { RemindMenuComponent } from './home/todo-options/remind-menu/remind-menu.component';
+import { AddDueDateMenuComponent } from './home/todo-options/add-due-date-menu/add-due-date-menu.component';
+import { RepeatMenuComponent } from './home/todo-options/repeat-menu/repeat-menu.component';
 @NgModule({
   declarations: [
     TodoComponent, 
     TodoOptionsComponent,
-    StepMenuComponent
+    StepMenuComponent,
+    RemindMenuComponent,
+    AddDueDateMenuComponent,
+    RepeatMenuComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +25,10 @@ import { FormsModule } from '@angular/forms';
   exports: [
     TodoComponent,
     TodoOptionsComponent,
-    StepMenuComponent
+    StepMenuComponent,
+    RemindMenuComponent,
+    AddDueDateMenuComponent,
+    RepeatMenuComponent
     
   ],
 })
