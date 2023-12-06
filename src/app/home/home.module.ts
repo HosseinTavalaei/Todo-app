@@ -5,11 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { MydayPage } from './myday/myday.page';
-import { CompletedPage } from './completed/completed.page';
-import { ImportantPage } from './important/important.page';
 import { SharedModule } from '../shared.module';
-
+import { DisplayTodosPage } from './display-todos/display-todos.page';
 
 @NgModule({
   imports: [
@@ -20,9 +17,8 @@ import { SharedModule } from '../shared.module';
     SharedModule
   ],
   declarations: [HomePage,
-  MydayPage,
-  CompletedPage,
-  ImportantPage
+  DisplayTodosPage
+  
 ]
 
 })

@@ -1,40 +1,40 @@
+import { ActivatedRoute } from '@angular/router';
 import { TodosService } from './../todos.service';
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-
-} from '@angular/core';
-import { AlertController} from '@ionic/angular';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { ITodo } from 'src/app/auth/Database';
+import { __param } from 'tslib';
 
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss'],
 })
-export class TodoComponent {
+export class TodoComponent implements OnInit {
   @Input() receivedTodo: ITodo | undefined;
-  @Input() pageLoc!: string;
   @Input() isDetailMode: boolean | undefined;
-  @Input() todoText : string | undefined = ''
+  @Input() todoText: string | undefined = '';
   @Input() flexible: boolean = false;
   @Output() public isOpen = new EventEmitter<boolean>();
   @Output() public clickedTodo = new EventEmitter<ITodo>();
-  
+
   isOptionsOn: boolean = false;
+  userLoc: string = 'myday';
   constructor(
     private todosService: TodosService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private activatedRoute: ActivatedRoute
   ) {}
 
+  ngOnInit() {
+    this.activatedRoute.paramMap.subscribe((param) => {
+      if (param.has('id')) {
+        this.userLoc = param.get('id') ?? 'myday';
+      }
+    });
+  }
 
-  setTodoStatusToComplete(
-    todo: ITodo | undefined,
-    userLoc: string,
-    event: any
-  ) {
+  setTodoStatusToComplete(todo: ITodo | undefined, event: any) {
     event.stopPropagation();
     if (todo !== undefined) {
       if (todo.isCompleted === false) {
@@ -44,8 +44,8 @@ export class TodoComponent {
       } else {
         this.todosService.undoCompletedTodo(todo);
       }
-      
-      if (userLoc === 'completedPage') {
+
+      if (this.userLoc === 'completed') {
         let item = event.target.parentElement.parentElement;
         setTimeout(() => {
           item.remove();
@@ -54,11 +54,7 @@ export class TodoComponent {
     }
   }
 
-  setTodoStatusToImportant(
-    todo: ITodo | undefined,
-    userLoc: string,
-    event: any
-  ) {
+  setTodoStatusToImportant(todo: ITodo | undefined, event: any) {
     event.stopPropagation();
     if (todo !== undefined) {
       if (todo.isImportant === false) {
@@ -66,7 +62,7 @@ export class TodoComponent {
       } else {
         this.todosService.undoImportantTodo(todo);
       }
-      if (userLoc === 'importantPage') {
+      if (this.userLoc === 'important') {
         let item = event.target.parentElement.parentElement;
         setTimeout(() => {
           item.remove();
@@ -104,16 +100,14 @@ export class TodoComponent {
     this.clickedTodo.emit(this.receivedTodo);
   }
 
-  changeTaskTitle(newText: string | undefined | number, event: any , todo: ITodo | undefined){
-
-    if(newText !== undefined && event.key === 'Enter' && todo !== undefined ){
-      let converted: string = newText.toString()
-      this.todosService.changeTodoText(todo, converted)
+  changeTaskTitle(
+    newText: string | undefined | number,
+    event: any,
+    todo: ITodo | undefined
+  ) {
+    if (newText !== undefined && event.key === 'Enter' && todo !== undefined) {
+      let converted: string = newText.toString();
+      this.todosService.changeTodoText(todo, converted);
     }
   }
 }
-
-
-
-  
-

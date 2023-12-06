@@ -3,7 +3,7 @@
     <ion-buttons slot="start" *ngIf="checkScreenSize()">
       <ion-menu-button menu="side-menu"></ion-menu-button>
     </ion-buttons>
-    <ion-title class="ion-margin-start">My day</ion-title>
+    <ion-title class="ion-margin-start">{{pageTitle}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,7 +19,6 @@
                 [receivedTodo]= "todo"
                 [todoText]="todo.text"
                 [flexible]="true"
-                [pageLoc] = "userLocation"
                 [isDetailMode]="isDetailMode"
                 (isOpen)="ChangeOptionsStatus($event)"
                 (clickedTodo)="setTodoOption($event)"

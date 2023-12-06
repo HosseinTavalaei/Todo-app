@@ -4,18 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MydayPageRoutingModule } from './myday-routing.module';
+import { DisplayTodosPageRoutingModule } from './display-todos-routing.module';
 
-import { MydayPage } from './myday.page';
-import { TodoComponent } from '../todo/todo.component';
+import { DisplayTodosPage } from './display-todos.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MydayPageRoutingModule
+    DisplayTodosPageRoutingModule
   ],
-  // declarations: [MydayPage]
+  // declarations: [DisplayTodosPage]
 })
-export class MydayPageModule {}
+export class DisplayTodosPageModule {}

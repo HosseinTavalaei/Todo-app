@@ -1,6 +1,6 @@
 <ion-item [class.todo-detail-mode]="isDetailMode" class="todo-item" button (click)="openTodoOption($event)" lines="none">
   <ion-buttons slot="start">
-    <ion-button (click)="setTodoStatusToComplete(receivedTodo, pageLoc, $event)">
+    <ion-button (click)="setTodoStatusToComplete(receivedTodo, $event)">
       <ion-icon slot="icon-only" name="ellipse-outline" *ngIf="!receivedTodo?.isCompleted"></ion-icon>
       <ion-icon slot="icon-only" name="checkmark-circle-outline" *ngIf="receivedTodo?.isCompleted"></ion-icon>
     </ion-button>
@@ -12,7 +12,7 @@
   (keyup)="taskTitle.value !== null && changeTaskTitle(taskTitle.value, $event, receivedTodo)"></ion-input>
 
   <ion-buttons slot="end">
-    <ion-button (click)="setTodoStatusToImportant(receivedTodo, pageLoc, $event)">
+    <ion-button (click)="setTodoStatusToImportant(receivedTodo, $event)">
       <ion-icon slot="icon-only" name="star-outline" *ngIf="!receivedTodo?.isImportant"></ion-icon>
       <ion-icon slot="icon-only" name="star" *ngIf="receivedTodo?.isImportant"
       color="warning"></ion-icon>

@@ -1,37 +1,53 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TodosService } from '../todos.service';
 import { ITodo } from 'src/app/auth/Database';
 import { Platform } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-myday',
-  templateUrl: './myday.page.html',
-  styleUrls: ['./myday.page.scss'],
+  selector: 'app-display-todos',
+  templateUrl: './display-todos.page.html',
+  styleUrls: ['./display-todos.page.scss'],
 })
-export class MydayPage implements OnInit {
+export class DisplayTodosPage implements OnInit {
 
   inputIconName: string = 'add'
   existTodos :ITodo[] | undefined;
-  userLocation: string = 'mydayPage'
   isOpenOption: boolean | undefined;
   todoOptionSelected!: ITodo;
   isDetailMode: boolean = false;
   changeText: boolean = false
-  loc: string = ''
-  
+  pageTitle: string = 'myday';
   constructor(
+    private activatedRoute: ActivatedRoute,
     private todosService: TodosService,
-    private platformCtrl: Platform,
-    private activatedRoute: ActivatedRoute
-    
-    ) { }
+    private platformCtrl: Platform
+  ) { }
 
   ngOnInit() {
-    this.existTodos = this.todosService.getActiveUserTodos()
-    this.checkScreenSize()
-  }
+    this.activatedRoute.paramMap.subscribe( param => {
+      if (param.has('id')) {
+        
+        switch (param.get('id')){
+          case 'myday':
+            this.pageTitle = 'My Day';
+            this.existTodos = this.todosService.getActiveUserTodos();
+            break;
+          case 'important':
+            this.pageTitle = 'Important Tasks';
+            this.existTodos = this.todosService.getImportantTodos();
+            break;
+          case 'completed':
+            this.pageTitle = 'Completed Tasks';
+            this.existTodos = this.todosService.getCompletedTodos();
+            break;
+          default:
+            break;
+        }
+      }
+    })
 
+  }
 
   changeInputIcon(){
     if (this.inputIconName === 'add'){
@@ -67,7 +83,7 @@ export class MydayPage implements OnInit {
     }
     return size;
   }
- 
+
   checkScreenSize(): boolean{
     let response: boolean; 
     if(this.platformCtrl.width() < 768 ){
