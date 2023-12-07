@@ -41,23 +41,21 @@ export class AuthService {
   private readonly _db = Database;
   private _isUserAuthenticated: boolean = false;
   private readonly localStorageKey: string = 'userData';
-  private readonly logedInuserKey: string = 'logedInUser';
+  private readonly userKey: string = 'logedInUser';
 
   logedInUser: IUser | undefined;
   constructor() {}
 
   wichUserIsLogedIn() {
-    const dataString = localStorage.getItem(this.logedInuserKey);
+    const dataString = localStorage.getItem(this.userKey);
     if (dataString !== null) {
       const logedIn = JSON.parse(dataString);
-      this.logedInUser = logedIn;
-      this._isUserAuthenticated = true;
+      return logedIn;
     }
-    return this.logedInUser;
   }
 
   getUserStatus() {
-    const dataString = localStorage.getItem(this.logedInuserKey);
+    const dataString = localStorage.getItem(this.userKey);
 
     if (dataString !== null) {
       this._isUserAuthenticated = true;
@@ -66,13 +64,12 @@ export class AuthService {
   }
 
   setUserToLogIn(user: IUser | undefined) {
-    localStorage.setItem(this.logedInuserKey, JSON.stringify(user));
+    localStorage.setItem(this.userKey, JSON.stringify(user));
     this._isUserAuthenticated = true;
-    this.logedInUser = user;
   }
 
   setUserToLogOut() {
-    localStorage.removeItem(this.logedInuserKey);
+    localStorage.removeItem(this.userKey);
     this._isUserAuthenticated = false;
   }
 

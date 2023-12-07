@@ -1,11 +1,8 @@
 import { AuthService } from './../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { MenuController,Platform } from '@ionic/angular';
 import { IUser } from '../auth/Database';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { TodosService } from './todos.service';
-import { ITodo } from '../auth/Database';
-
 
 @Component({
   selector: 'app-home',
@@ -13,41 +10,25 @@ import { ITodo } from '../auth/Database';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-  logedInUser: IUser | undefined ;
-  isProfileSettinOpen : boolean = false;
-  existTodos: ITodo[] | undefined;
-  pageTitle: string = ''
-  userLocation: string = 'completedPage'
+  logedInUser: IUser | undefined;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private todoService: TodosService,
-    private platformCtrl: Platform,
-
+    private todoService: TodosService
   ) {}
 
   ngOnInit() {
-    this.logedInUser = this.authService.wichUserIsLogedIn()
-    this.todoService.getActiveUser(this.logedInUser)
-    this.checkScreenSize()
+    this.logedInUser = this.authService.wichUserIsLogedIn();
+    this.todoService.getActiveUser(this.logedInUser);
   }
 
-  checkScreenSize(): boolean{
-    let response: boolean
-    if (this.platformCtrl.width() < 768){
-      response =true;
-    }else{
-      response = false;
-    }
-
-    return response;
+  ionViewWillEnter() {
+    this.logedInUser = this.authService.wichUserIsLogedIn();
   }
 
-  onLogOutUser(){
-    this.authService.setUserToLogOut()
-    this.router.navigateByUrl('/auth')
+  onLogOutUser() {
+    this.authService.setUserToLogOut();
+    this.router.navigateByUrl('/auth');
   }
-
 }

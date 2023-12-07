@@ -4,6 +4,7 @@ import { TodosService } from '../todos.service';
 import { ITodo } from 'src/app/auth/Database';
 import { Platform } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-display-todos',
   templateUrl: './display-todos.page.html',
@@ -18,10 +19,12 @@ export class DisplayTodosPage implements OnInit {
   isDetailMode: boolean = false;
   changeText: boolean = false
   pageTitle: string = 'myday';
+  isMenuOpen: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private todosService: TodosService,
-    private platformCtrl: Platform
+    private platformCtrl: Platform,
+   
   ) { }
 
   ngOnInit() {
@@ -93,4 +96,6 @@ export class DisplayTodosPage implements OnInit {
     }
     return response; 
   }
+
+
 }
