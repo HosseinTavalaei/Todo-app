@@ -10,8 +10,9 @@
   #taskTitle
   [(ngModel)]="todoText"
   [readonly]="flexible"
-  (keyup)="taskTitle.value !== null && changeTaskTitle(taskTitle.value, $event, receivedTodo)"></ion-input>
-
+  (keyup)="taskTitle.value !== null && changeTaskTitle(taskTitle.value, $event, receivedTodo)"
+  [class.strikethrough]="receivedTodo?.isCompleted"></ion-input>
+  
   <ion-buttons slot="end">
     <ion-button (click)="setTodoStatusToImportant(receivedTodo, $event)">
       <ion-icon slot="icon-only" name="star-outline" *ngIf="!receivedTodo?.isImportant"></ion-icon>

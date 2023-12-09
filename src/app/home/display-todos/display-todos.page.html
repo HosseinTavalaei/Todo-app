@@ -4,7 +4,6 @@
       <ion-menu-button menu="side-menu"></ion-menu-button>
     </ion-buttons>
     <ion-title class="ion-margin-start">{{pageTitle}}</ion-title>
-
   </ion-toolbar>
 </ion-header>
 
@@ -16,49 +15,52 @@
           <ion-row>
             <ion-col size="12">
               <ion-list class="todos-list">
-                <app-todo-item *ngFor="let todo of existTodos"
-                [receivedTodo]= "todo"
-                [todoText]="todo.text"
-                [flexible]="true"
-                [isDetailMode]="isDetailMode"
-                (isOpen)="ChangeOptionsStatus($event)"
-                (clickedTodo)="setTodoOption($event)"
+                <app-todo-item
+                  *ngFor="let todo of existTodos"
+                  [receivedTodo]="todo"
+                  [todoText]="todo.text"
+                  [flexible]="true"
+                  [isDetailMode]="isDetailMode"
+                  (isOpen)="ChangeOptionsStatus($event)"
+                  (clickedTodo)="setTodoOption($event)"
                 ></app-todo-item>
               </ion-list>
             </ion-col>
           </ion-row>
-          <ion-row >
+          <ion-row>
             <ion-col size="12">
-              <ion-item class="add-task-item">
-                <ion-input 
-              type="text"
-               placeholder="Add a task" 
-               fill="outline" 
-               clearInput="true"
-               color="dark"
-              inputmode="email"
-              class="add-task-input"
-              (ionFocus)="changeInputIcon()"
-              (ionBlur)="changeInputIcon()"
-              (keyup)="addNewTask($event)"
-               >
-               <ion-icon [name]="inputIconName" slot="icon-only" class="icon-inside-input"></ion-icon>
-              </ion-input>
+              <ion-item  class="add-task-item" lines="none">
+                <ion-input
+                  type="text"
+                  placeholder="Add a task"
+                  fill="outline"
+                  clearInput="true"
+                  color="dark"
+                  inputmode="email"
+                  class="add-task-input"
+                  (ionFocus)="changeInputIcon()"
+                  (ionBlur)="changeInputIcon()"
+                  (keyup)="addNewTask($event)"
+                  *ngIf="pageTitle === 'My Day' "
+                >
+                  <ion-icon
+                    [name]="inputIconName"
+                    slot="icon-only"
+                    class="icon-inside-input"
+                  ></ion-icon>
+                </ion-input>
               </ion-item>
-      
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-col>
       <ion-col size="3" *ngIf="isOpenOption">
         <app-todo-options
-         [todo]="todoOptionSelected"
-         (isOpen)="ChangeOptionsStatus($event)"
-         (isOpen)="ChangeOptionsStatus($event)"></app-todo-options>
+          [todo]="todoOptionSelected"
+          (isOpen)="ChangeOptionsStatus($event)"
+          (isOpen)="ChangeOptionsStatus($event)"
+        ></app-todo-options>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
-
-
-

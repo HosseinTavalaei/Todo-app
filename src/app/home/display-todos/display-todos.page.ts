@@ -18,7 +18,7 @@ export class DisplayTodosPage implements OnInit {
   todoOptionSelected!: ITodo;
   isDetailMode: boolean = false;
   changeText: boolean = false
-  pageTitle: string = 'myday';
+  pageTitle: string = 'My Day';
   isMenuOpen: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
