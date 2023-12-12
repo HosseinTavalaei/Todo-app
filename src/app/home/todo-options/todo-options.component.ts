@@ -3,28 +3,26 @@ import { ISubTodo, ITodo } from 'src/app/auth/Database';
 import { TodosService } from '../todos.service';
 import { StepMenuComponent } from './step-menu/step-menu.component';
 import { AlertController, PopoverController } from '@ionic/angular';
-import { RemindMenuComponent } from './remind-menu/remind-menu.component';
-import { AddDueDateMenuComponent } from './add-due-date-menu/add-due-date-menu.component';
-import { RepeatMenuComponent } from './repeat-menu/repeat-menu.component';
-
+import { format, parseISO } from 'date-fns';
 @Component({
   selector: 'app-todo-options',
   templateUrl: './todo-options.component.html',
   styleUrls: ['./todo-options.component.scss'],
 })
 export class TodoOptionsComponent {
+  
   @Input() todo: ITodo | undefined;
   @Output() public isOpen = new EventEmitter<boolean>();
   inputIconName: string = 'add';
   todoItem: string = 'todo-item-detail';
   isDetailMode: boolean = true;
-
+ 
   constructor(
     private todosService: TodosService,
     private alertCtrl: AlertController,
     public popoverCtrl: PopoverController
   ) {}
-
+ 
   changeInputIcon() {
     if (this.inputIconName === 'add') {
       this.inputIconName = 'ellipse-outline';
@@ -63,36 +61,6 @@ export class TodoOptionsComponent {
         showBackdrop: false,
         componentProps: { step, todo },
         cssClass: 'step-menu',
-      })
-      .then((popEl) => popEl.present());
-  }
-
-  presentRemindMenu(e: any) {
-    this.popoverCtrl
-      .create({
-        component: RemindMenuComponent,
-        event: e,
-        showBackdrop: false,
-      })
-      .then((popEl) => popEl.present());
-  }
-
-  presentDueDateMenu(e: any) {
-    this.popoverCtrl
-      .create({
-        component: AddDueDateMenuComponent,
-        event: e,
-        showBackdrop: false,
-      })
-      .then((popEl) => popEl.present());
-  }
-
-  presentRepeatMenu(e: any) {
-    this.popoverCtrl
-      .create({
-        component: RepeatMenuComponent,
-        event: e,
-        showBackdrop: false,
       })
       .then((popEl) => popEl.present());
   }

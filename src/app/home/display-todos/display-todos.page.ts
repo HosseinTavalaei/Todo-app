@@ -63,10 +63,9 @@ export class DisplayTodosPage implements OnInit {
   addNewTask(event: any){
     if(event.key === 'Enter'){
       this.todosService.addNewTodo(event.target.value)
-  
       event.target.value = null
-    }else return
-    
+  
+    }
   }
 
   ChangeOptionsStatus(option: boolean){

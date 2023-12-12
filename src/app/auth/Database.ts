@@ -9,6 +9,7 @@ export interface ITodo{
     text: string,
     isCompleted: boolean,
     isImportant: boolean,
+    createdAt: string[],
     subTodos: ISubTodo[]
 }
 

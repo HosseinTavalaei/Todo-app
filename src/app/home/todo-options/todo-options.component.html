@@ -13,9 +13,7 @@
       [receivedTodo]="todo"
       [todoText]="todo?.text"
       [isDetailMode]="isDetailMode"
-      [flexible]="false"
-    
-    >
+      [flexible]="false">
     </app-todo-item>
     <ion-item lines="none" *ngFor="let step of todo?.subTodos" class="step">
       <ion-buttons slot="start">
@@ -67,19 +65,113 @@
   </ion-list>
 
   <ion-list  class="ion-margin-top detail-section">
-    <ion-item button lines="none" (click)="presentRemindMenu($event)">
+    <ion-item button lines="none" id="remind-me">
       <ion-icon slot="start" name="alarm-outline"></ion-icon>
       <ion-label>Remind me</ion-label>
+      <ion-popover trigger="remind-me" triggerAction="click" showBackdrop="false" dismissOnSelect="true">
+        <ng-template>
+          <ion-content>
+            <ion-list class="todo-option-sub-menu">
+              <ion-item lines="none" button >
+                <ion-icon slot="start" name="time-outline"></ion-icon>
+                <ion-label>Later today</ion-label>
+              </ion-item>
+          
+              <ion-item lines="none" button>
+                <ion-icon slot="start" name="arrow-forward-circle-outline"></ion-icon>
+                <ion-label>Tomorrow</ion-label>
+              </ion-item>
+              <ion-item lines="none" button>
+                <ion-icon slot="start" name="play-forward-circle-outline"></ion-icon>
+                <ion-label>Next week</ion-label>
+              </ion-item>
+          
+              <ion-item lines="none" button id="date-picker">
+                <ion-icon name="calendar-clear-outline"></ion-icon>
+                <ion-label>Pick a date & time</ion-label>
+                <ion-popover trigger="date-picker"  class="date-picker">
+                  <ng-template>
+                    <app-date-picker></app-date-picker>
+                  </ng-template>
+                </ion-popover>
+              </ion-item>
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
     </ion-item>
 
-    <ion-item button lines="none" (click)="presentDueDateMenu($event)">
+    <ion-item button lines="none" id="add-due">
       <ion-icon slot="start" name="calendar-outline"></ion-icon>
       <ion-label>Add due date</ion-label>
+      <ion-popover trigger="add-due" triggerAction="click" showBackdrop="false" dismissOnSelect="true">
+        <ng-template>
+          <ion-content>
+            <ion-list class="todo-option-sub-menu">
+              <ion-item lines="none" button >
+                <ion-icon slot="start" name="calendar-clear-outline"></ion-icon>
+                <ion-label>Today</ion-label>
+              </ion-item>
+          
+              <ion-item lines="none" button >
+                <ion-icon slot="start" name="calendar-clear-outline"></ion-icon>
+                <ion-label>Tomorrow</ion-label>
+              </ion-item>
+              <ion-item lines="none" button >
+                <ion-icon slot="start" name="calendar-clear-outline"></ion-icon>
+                <ion-label>Next week</ion-label>
+              </ion-item>
+          
+              <ion-item lines="none" button >
+                <ion-icon slot="start" name="calendar-outline"></ion-icon>
+                <ion-label>Pick a date</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
     </ion-item>
 
-    <ion-item button lines="none" (click)="presentRepeatMenu($event)">
+    <ion-item button lines="none" id="repeat">
       <ion-icon slot="start" name="calendar-clear-outline"></ion-icon>
       <ion-label>Repeat</ion-label>
+      <ion-popover trigger="repeat" triggerAction="click" showBackdrop="false" dismissOnSelect="true">
+        <ng-template>
+          <ion-content>
+            <ion-list class="todo-option-sub-menu">
+              <ion-item lines="none" button >
+                <ion-icon slot="start" name="calendar-clear-outline"></ion-icon>
+                <ion-label>Daily</ion-label>
+              </ion-item>
+          
+              <ion-item lines="none" button >
+                <ion-icon slot="start" name="calendar-clear-outline"></ion-icon>
+                <ion-label>Weekdays</ion-label>
+              </ion-item>
+              <ion-item lines="none" button >
+                <ion-icon slot="start" name="calendar-clear-outline"></ion-icon>
+                <ion-label>Weekly</ion-label>
+              </ion-item>
+          
+              <ion-item lines="none" button >
+                <ion-icon slot="start" name="calendar-outline"></ion-icon>
+                <ion-label>Monthly</ion-label>
+              </ion-item>
+          
+              <ion-item lines="none" button >
+                <ion-icon slot="start" name="calendar-outline"></ion-icon>
+                <ion-label>Yearly</ion-label>
+              </ion-item>
+          
+              <ion-item lines="none" button >
+                <ion-icon slot="start" name="calendar-clear-outline"></ion-icon>
+                <ion-label>Custom</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-content>
+          
+        </ng-template>
+      </ion-popover>
     </ion-item>
   </ion-list>
 
@@ -98,11 +190,12 @@
   </ion-list>
 </div>
   <ion-item class="ion-margin-top footer" lines="none">
+  
     <ion-buttons slot="end">
       <ion-button (click)="deleteTodo($event)">
         <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-label>created on 5 dec 2023</ion-label>
+    <ion-label>Created on {{todo?.createdAt?.[0]}}, {{todo?.createdAt?.[1]}} {{todo?.createdAt?.[2]}}</ion-label>
   </ion-item>
 </ion-content>

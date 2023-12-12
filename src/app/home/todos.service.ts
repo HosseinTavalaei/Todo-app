@@ -32,12 +32,13 @@ export class TodosService {
  
   addNewTodo(newTodoText: string): void{
     if (this.activeUserTodos !== undefined) {
-      
+      const date: string[] = new Date().toString().split(' ').filter((item: string, index: number) => index < 5);
       const newTodo: ITodo = {
         id : this.activeUserTodos.length + 1,
         text: newTodoText,
         isCompleted: false,
         isImportant: false,
+        createdAt: date,
         subTodos: []
       }
 

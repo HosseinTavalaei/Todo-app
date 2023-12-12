@@ -1,0 +1,21 @@
+<ion-content>
+  <ion-item>
+    <ion-label >{{formateString}}</ion-label>
+    </ion-item>
+    <ion-datetime display-format="DD.MM.YYYY HH:mm"
+    #datePicker
+    [value]="dateValue"
+    (ionChange)="changeDate(datePicker.value)"
+    showDefaultButtons="true">
+    <ion-buttons slot="buttons">
+      <ion-button (click)="close()">
+        Cancel
+      </ion-button>
+
+      <ion-button (click)="select()">
+        Save
+      </ion-button>
+    </ion-buttons>
+  </ion-datetime>
+</ion-content>
+
