@@ -1,7 +1,6 @@
-<ion-content>
-  <ion-item class="header" lines="none">
+<ion-item class="header" lines="none">
     <ion-buttons slot="end">
-      <ion-button (click)="closeTodoOptionPanel($event)"> 
+      <ion-button (click)="closeTodoOptionPanel()"> 
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -24,7 +23,7 @@
       </ion-buttons>
       <ion-label>{{ step.text }}</ion-label>
       <ion-buttons slot="end">
-        <ion-button (click)="presentStemMenu(step, $event)">
+        <ion-button (click)="presentStepMenu(step, $event)">
           <ion-icon
             slot="icon-only"
             name="ellipsis-vertical-outline"
@@ -202,10 +201,9 @@
   <ion-item class="ion-margin-top footer" lines="none">
   
     <ion-buttons slot="end">
-      <ion-button (click)="deleteTodo($event)">
+      <ion-button (click)="deleteTodo()">
         <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-label>Created on {{todo?.createdAt?.[0]}}, {{todo?.createdAt?.[1]}} {{todo?.createdAt?.[2]}}</ion-label>
   </ion-item>
-</ion-content>

@@ -37,12 +37,6 @@ ion-item{
     right: 0;
     bottom: 0;
 
-    &::after{
-        content: '';
-        display: block;
-        clear: both;
-    }
-
     ion-buttons{
         margin-left: 5px;
         padding: 0;
@@ -81,4 +75,9 @@ ion-item{
         margin: 2px;
         font-size: 0.9rem;
     } 
+}
+
+.date-picker{
+    --min-width: 300px;
+    padding: 8px;
 }

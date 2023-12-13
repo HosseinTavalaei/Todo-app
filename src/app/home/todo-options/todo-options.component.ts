@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { ISubTodo, ITodo } from 'src/app/auth/Database';
 import { TodosService } from '../todos.service';
 import { StepMenuComponent } from './step-menu/step-menu.component';
-import { AlertController, PopoverController } from '@ionic/angular';
+import { AlertController, PopoverController, MenuController, Platform } from '@ionic/angular';
 import { ISepratedDate } from '../date-picker/time-model';
 
 @Component({
@@ -24,7 +24,10 @@ export class TodoOptionsComponent{
   constructor(
     private todosService: TodosService,
     private alertCtrl: AlertController,
+    private menuCtrl: MenuController,
+    private platformCtrl: Platform,
     public popoverCtrl: PopoverController
+
   ) {}
   
 
@@ -66,7 +69,7 @@ export class TodoOptionsComponent{
     }
   }
 
-  presentStemMenu(step: ISubTodo, e: any) {
+  presentStepMenu(step: ISubTodo, e: any) {
     const todo = this.todo;
     this.popoverCtrl
       .create({
@@ -79,7 +82,7 @@ export class TodoOptionsComponent{
       .then((popEl) => popEl.present());
   }
 
-  deleteTodo(event: any) {
+  deleteTodo() {
     if (this.todo !== undefined) {
       const todoId: number = this.todo.id;
       this.alertCtrl.create({
@@ -92,6 +95,7 @@ export class TodoOptionsComponent{
 
               this.isOpen.emit(false);
               this.todosService.removeTodo(todoId);
+              this.menuCtrl.close()
 
             }
           },
@@ -104,8 +108,12 @@ export class TodoOptionsComponent{
     }
   }
 
-  closeTodoOptionPanel(event:any){
-    this.isOpen.emit(false);
+  closeTodoOptionPanel(){
+    if (this.platformCtrl.width() <= 768) {
+      this.menuCtrl.close()
+    }else
+  
+    this.isOpen.emit(true);
   }
 
   getPickedDate(e: ISepratedDate){

@@ -28,6 +28,7 @@ export class DisplayTodosPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isOpenOption = true;
     this.activatedRoute.paramMap.subscribe( param => {
       if (param.has('id')) {
         
@@ -96,5 +97,5 @@ export class DisplayTodosPage implements OnInit {
     return response; 
   }
 
-
+  onSplitPaneVisible(e: any){}
 }

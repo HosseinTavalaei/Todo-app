@@ -1,9 +1,11 @@
 import { ActivatedRoute } from '@angular/router';
 import { TodosService } from './../todos.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController, Platform } from '@ionic/angular';
 import { ITodo } from 'src/app/auth/Database';
-import { __param } from 'tslib';
+
+
+
 
 @Component({
   selector: 'app-todo-item',
@@ -23,7 +25,10 @@ export class TodoComponent implements OnInit {
   constructor(
     private todosService: TodosService,
     private alertCtrl: AlertController,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private menuCtrl: MenuController,
+    private platformCtrl: Platform
+  
   ) {}
 
   ngOnInit() {
@@ -95,9 +100,17 @@ export class TodoComponent implements OnInit {
   }
 
   openTodoOption(event: any) {
-    this.isOptionsOn = !this.isOptionsOn;
-    this.isOpen.emit(this.isOptionsOn);
-    this.clickedTodo.emit(this.receivedTodo);
+    if (this.platformCtrl.width() <= 768) {
+      this.menuCtrl.open('todo-options')
+      this.clickedTodo.emit(this.receivedTodo);
+    }else{
+
+      this.isOptionsOn = !this.isOptionsOn;
+      this.isOpen.emit(this.isOptionsOn);
+      this.clickedTodo.emit(this.receivedTodo);
+    }
+
+    // this.menuCtrl.open('todo-options')
   }
 
   changeTaskTitle(

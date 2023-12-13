@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { TodoOptionsComponent } from './home/todo-options/todo-options.component';
 import { FormsModule } from '@angular/forms';
 import { DatePickerComponent } from './home/date-picker/date-picker.component';
+
 @NgModule({
   declarations: [
     TodoComponent, 

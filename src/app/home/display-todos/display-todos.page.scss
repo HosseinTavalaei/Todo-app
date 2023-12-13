@@ -1,12 +1,48 @@
-// ion-menu{
-//     --max-width: 304px;
-// }
+.todos-screen{
+    --background: var(--ion-color-primary-tint);
+    --color: var(--ion-color-primary-contrast);
+    --padding-top: 70px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-bottom: 20px;
+    &::part(scroll){
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
-// .todos-screen {
-//     &.menu-open {
-//       // Adjust the width as per your requirement
-//       max-width: calc(100% - 250px); /* Example width reduction when the menu opens */
-//       width: calc(100% - 250px); /* Example width reduction when the menu opens */
-//     }
-//   }
+    }
+  }
+
+  ion-toolbar{
+    --background: var(--ion-color-primary-shade);
+    --color: var(--ion-color-primary-contrast)
+  }
+
+  .add-task-item{
+    --background: transparent;
+    --color: var(--ion-color-tertiary-tint);
+  }
+
+  .add-task-input { 
+    border-radius: 6px;
+    --padding-start: 50px !important;
+    font-size: 1.2rem;
+      &.ion-color-dark {
+        --ion-color-base: var(--ion-color-secondary-tint, #222428) !important;
+        --ion-color-base-rgb: var(--ion-color-dark-rgb, 34, 36, 40) !important;
+        --ion-color-contrast: var(--ion-color-dark-contrast, #fff) !important;
+        --ion-color-contrast-rgb: var(--ion-color-dark-contrast-rgb, 255, 255, 255) !important;
+        --ion-color-shade: var(--ion-color-secondary-tint, #1e2023) !important;
+        --ion-color-tint: var(--ion-color-dark-tint, #383a3e) !important;
+    }
+  }
+
+  .todo-option-menu{
+    --padding-top: 70px;
+    --background: var(--ion-color-light-tint) !important;
+  }
+
+  ion-split-pane{
+    --side-max-width: 350px;
+  }
 
