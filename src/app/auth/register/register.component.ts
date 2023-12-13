@@ -31,7 +31,6 @@ export class RegisterComponent implements OnInit {
 
   registerUser(form: NgForm) {
 
-    console.log('hello');
     const userIsRegistering: Omit<IUser, 'id'> = {
       firstName: form.value.firstName,
       lastName: form.value.lastName,

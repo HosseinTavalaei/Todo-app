@@ -1,0 +1,16 @@
+.cancel-button{
+    --color-focused: black !important;
+    --color-hover: black !important;
+    --background: transparent !important;
+    min-width: 50%;
+}
+
+.save-button{
+    --color-hover: black !important;
+    min-width: 50%;
+    --background: var(--ion-color-secondary-tint) !important;
+}
+ 
+
+
+

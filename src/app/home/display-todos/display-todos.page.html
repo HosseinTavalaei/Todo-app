@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="side-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-margin-start">{{pageTitle}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-split-pane contentId="display-todo" when="md" [disabled]="isOpenOption">
+    <ion-menu contentId="display-todo" menuId="todo-options" side="end" type="overlay">
+      <ion-content [fullscreen]="true" class="todo-option-menu">
+        <app-todo-options
+            [todo]="todoOptionSelected"
+            (isOpen)="ChangeOptionsStatus($event)"
+          ></app-todo-options>
+      </ion-content>
+    </ion-menu>
+    <ion-content id="display-todo" class="todos-screen">
+     <div>
+      <app-todo-item
+      *ngFor="let todo of existTodos"
+      [receivedTodo]="todo"
+      [todoText]="todo.text"
+      [flexible]="true"
+      [isDetailMode]="isDetailMode"
+      (isOpen)="ChangeOptionsStatus($event)"
+      (clickedTodo)="setTodoOption($event)">
+     </app-todo-item>
+     </div>
+    <ion-item  class="add-task-item" lines="none">
+      <ion-input
+        type="text"
+        placeholder="Add a task"
+        fill="outline"
+        clearInput="true"
+        color="dark"
+        inputmode="email"
+        class="add-task-input"
+        (ionFocus)="changeInputIcon()"
+        (ionBlur)="changeInputIcon()"
+        (keyup)="addNewTask($event)"
+        *ngIf="pageTitle === 'My Day' "
+      >
+        <ion-icon
+          [name]="inputIconName"
+          slot="icon-only"
+          class="icon-inside-input"
+        ></ion-icon>
+      </ion-input>
+    </ion-item>
+    </ion-content>
+  </ion-split-pane>
+
+
+
+

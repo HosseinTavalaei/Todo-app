@@ -1,7 +1,5 @@
 import { AuthService } from './../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
-import { MenuController } from '@ionic/angular';
 import { IUser } from '../auth/Database';
 import { Router } from '@angular/router';
 import { TodosService } from './todos.service';
@@ -12,9 +10,7 @@ import { TodosService } from './todos.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-  logedInUser: IUser | undefined ;
-  isProfileSettinOpen : boolean = false;
+  logedInUser: IUser | undefined;
 
   constructor(
     private authService: AuthService,
@@ -23,15 +19,16 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.logedInUser = this.authService.wichUserIsLogedIn()
-    this.todoService.getActiveUser(this.logedInUser)
+    this.logedInUser = this.authService.wichUserIsLogedIn();
+    this.todoService.getActiveUser(this.logedInUser);
   }
 
-
-  onLogOutUser(){
-    this.authService.setUserToLogOut()
-    this.router.navigateByUrl('/auth')
-  
+  ionViewWillEnter() {
+    this.logedInUser = this.authService.wichUserIsLogedIn();
   }
 
+  onLogOutUser() {
+    this.authService.setUserToLogOut();
+    this.router.navigateByUrl('/auth');
+  }
 }

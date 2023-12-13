@@ -1,0 +1,17 @@
+.todo-item{
+    --background: var(--ion-color-tertiary-tint);
+    --color: var(--ion-color-tertiary-contrast);
+    --border-radius:5px;
+     margin-bottom: 5px;
+  }
+
+.todo-detail-mode{
+    --background: transparent !important;
+    font-size: 1.3rem;
+    width: 100%;
+}
+
+.strikethrough{
+    text-decoration: line-through;
+}
+
