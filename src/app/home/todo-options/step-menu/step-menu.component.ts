@@ -36,19 +36,20 @@ export class StepMenuComponent {
     this.popoverCtrl.dismiss()
     this.alertCtrl.create({
       header: 'Delete step',
-      message: 'Are you sure to delete ?',
-      buttons:[{
-        text: 'No',
-        role: 'Cancel'
-      },{
-        text:'Yes',
-        role:'delete',
-        handler:()=> {
-          if(step !== undefined){
-            this.todosService.removeSubTodo(step, this.todo)
-            
+      message: `${step?.text} will be permanently deleted`,
+      buttons:[
+        {
+          text:'Delete',
+          role:'delete',
+          handler:()=> {
+            if(step !== undefined){
+              this.todosService.removeSubTodo(step, this.todo)
+              
+            }
           }
-        }
+        },{
+        text: 'Cancel',
+        role: 'Cancel'
       }]
     }).then(alertEl => alertEl.present())
   }

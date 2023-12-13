@@ -53,11 +53,11 @@
   </ion-list>
 
   <ion-list class="ion-margin-top detail-section">
-    <ion-item lines="none" button>
+    <ion-item lines="none" button (click)="addToMyDay()">
       <ion-icon slot="start" name="sunny-outline"></ion-icon>
       <ion-label>Add to My Day</ion-label>
-      <ion-buttons slot="end">
-        <ion-button> 
+      <ion-buttons slot="end" *ngIf="isAddMyDay">
+        <ion-button (click)="removeFromMyDay($event)"> 
           <ion-icon slot="icon-only" name="close"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -67,7 +67,16 @@
   <ion-list  class="ion-margin-top detail-section">
     <ion-item button lines="none" id="remind-me">
       <ion-icon slot="start" name="alarm-outline"></ion-icon>
-      <ion-label>Remind me</ion-label>
+      <ion-label *ngIf="!isReminderSet">Remind me</ion-label>
+      <div class="reminder-set" *ngIf="reminderStatus === 'pickDate'">
+        <ion-label>Remind me at {{sepratedDate?.hourAndMinutes}}</ion-label>
+        <p>{{sepratedDate?.dayOfTheWeek}}, {{sepratedDate?.month}} {{sepratedDate?.dayOfTheMonth}}</p>
+      </div>
+      <ion-buttons slot="end" *ngIf="isReminderSet">
+        <ion-button (click)="removeReminder($event)">  
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
       <ion-popover trigger="remind-me" triggerAction="click" showBackdrop="false" dismissOnSelect="true">
         <ng-template>
           <ion-content>
@@ -91,7 +100,8 @@
                 <ion-label>Pick a date & time</ion-label>
                 <ion-popover trigger="date-picker"  class="date-picker">
                   <ng-template>
-                    <app-date-picker></app-date-picker>
+                    <app-date-picker
+                    (pickedDate)="getPickedDate($event)"></app-date-picker>
                   </ng-template>
                 </ion-popover>
               </ion-item>

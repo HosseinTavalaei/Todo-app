@@ -70,3 +70,15 @@ ion-item{
         border-top: solid 1px var(--ion-color-light-shade);
     }
 }
+
+
+.reminder-set{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    p{
+        margin: 2px;
+        font-size: 0.9rem;
+    } 
+}

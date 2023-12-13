@@ -1,27 +1,41 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { ISubTodo, ITodo } from 'src/app/auth/Database';
 import { TodosService } from '../todos.service';
 import { StepMenuComponent } from './step-menu/step-menu.component';
 import { AlertController, PopoverController } from '@ionic/angular';
-import { format, parseISO } from 'date-fns';
+import { ISepratedDate } from '../date-picker/time-model';
+
 @Component({
   selector: 'app-todo-options',
   templateUrl: './todo-options.component.html',
   styleUrls: ['./todo-options.component.scss'],
 })
-export class TodoOptionsComponent {
+export class TodoOptionsComponent{
   
   @Input() todo: ITodo | undefined;
   @Output() public isOpen = new EventEmitter<boolean>();
   inputIconName: string = 'add';
   todoItem: string = 'todo-item-detail';
   isDetailMode: boolean = true;
- 
+  isReminderSet: boolean = false;
+  reminderStatus: string = 'none'
+  sepratedDate: ISepratedDate | undefined; 
+  isAddMyDay: boolean = false;
   constructor(
     private todosService: TodosService,
     private alertCtrl: AlertController,
     public popoverCtrl: PopoverController
   ) {}
+  
+
+  addToMyDay(){
+    this.isAddMyDay = true;
+  }
+
+  removeFromMyDay(e: any){
+    e.stopPropagation()
+    this.isAddMyDay = false; 
+  }
  
   changeInputIcon() {
     if (this.inputIconName === 'add') {
@@ -92,5 +106,17 @@ export class TodoOptionsComponent {
 
   closeTodoOptionPanel(event:any){
     this.isOpen.emit(false);
+  }
+
+  getPickedDate(e: ISepratedDate){
+    this.sepratedDate = e
+    this.reminderStatus = 'pickDate'
+    this.isReminderSet = true
+  }
+
+  removeReminder(e: any){
+    e.stopPropagation()
+    this.reminderStatus = 'none'
+    this.isReminderSet = false
   }
 }
